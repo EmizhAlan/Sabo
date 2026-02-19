@@ -6,7 +6,12 @@ from models.component import Component
 from builder.site_builder import SiteBuilder
 
 
+# Главный файл CLI Sabo. Обрабатывает команды пользователя и запускает сборку проекта.
 def load_project_from_json(path: str) -> Project:
+    """
+    Загружает проект из JSON файла.
+    формат JSON: имя проекта, страницы, компоненты каждой страницы.
+    """
     with open(path, "r", encoding="utf-8") as f:
         data = json.load(f)
         
@@ -28,6 +33,7 @@ def load_project_from_json(path: str) -> Project:
     return project
 
 def main():
+    """Точка входа CLI Sabo"""
     if len(sys.argv) < 3:
         print("Usege: python sabo.py build peth_to_project.json")
         return
@@ -40,7 +46,7 @@ def main():
         builder = SiteBuilder(Project)
         builder.build()
     else:
-        print("Unknown command")
+        print(f"Unknown command: {command}")
         
 if __name__ == "__main__":
     main()
