@@ -23,4 +23,4 @@ class SiteBuilder:
         for name in self.component_registry:
             print(f" - {name}")
             
-        print("Build complete.")
+        print("Build complete (no rendering yet).")

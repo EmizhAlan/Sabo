@@ -1,16 +1,25 @@
 {
-  "name": "My First Project",
+  "name": "robotservice",
   "pages": [
     {
       "id": "home",
-      "name": "Home Page",
+      "name": "Home",
       "components": [
-        {
-          "name": "button",
-          "props": {
-            "text": "Click me"
-          }
-        }
+        {"name": "button", "props": {"text": "Click me"}}
+      ]
+    },
+    {
+      "id": "about",
+      "name": "About",
+      "components": [
+        {"name": "button", "props": {"text": "Click me"}}
+      ]
+    },
+    {
+      "id": "contact",
+      "name": "Contact",
+      "components": [
+        {"name": "button", "props": {"text": "Click me"}}
       ]
     }
   ]

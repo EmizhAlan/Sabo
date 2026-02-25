@@ -1,5 +1,7 @@
 import sys
 import json
+from pathlib import Path
+
 from models.project import Project
 from models.page import Page
 from builder.site_builder import SiteBuilder
@@ -12,7 +14,13 @@ def load_project_from_json(path: str) -> Project:
     Загружает проект из JSON файла.
     формат JSON: имя проекта, страницы, компоненты каждой страницы.
     """
-    with open(path, "r", encoding="utf-8") as f:
+    
+    path_obj = Path(path)
+    
+    if not path_obj.exists():
+        raise FileNotFoundError(f"File not found: {path}")
+    
+    with open(path_obj, "r", encoding="utf-8") as f:
         data = json.load(f)
         
     project = Project(name=data["name"])
@@ -34,23 +42,36 @@ def load_project_from_json(path: str) -> Project:
 def list_components():
     loader = ComponentLoader("components")
     loader.load_all()
+    
     print("Available components:")
     for name in loader.list_components():
         print(f"- {name}")
 
 def main():
     """Точка входа CLI Sabo"""
-    if len(sys.argv) < 3:
-        print("Usege: python sabo.py build peth_to_project.json")
+    
+    if len(sys.argv) < 2:
+        print("Usage:")
+        print("  python sabo.py build peth_to_project.json")
+        print("  python sabo.py list")
         return
     
     command = sys.argv[1]
     
     if command == "build":
+        if len(sys.argv) < 3:
+            print("Error: project path required.")
+            return
+        
         project_path = sys.argv[2]
         project = load_project_from_json(project_path)
         builder = SiteBuilder(project)
         builder.build()
+        
+        print("Build completed.")
+        
+    elif command == "list":
+        list_components()
     else:
         print(f"Unknown command: {command}")
         
