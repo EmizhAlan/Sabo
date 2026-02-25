@@ -2,8 +2,8 @@ import sys
 import json
 from models.project import Project
 from models.page import Page
-from models.component import Component
 from builder.site_builder import SiteBuilder
+from core.component_loader import ComponentLoader
 
 
 # Главный файл CLI Sabo. Обрабатывает команды пользователя и запускает сборку проекта.
@@ -21,16 +21,22 @@ def load_project_from_json(path: str) -> Project:
         page = Page(id=page_data["id"], name=page_data["name"])
         
         for comp_data in page_data.get("components", []):
-            component = Component(
-                id=comp_data["id"],
-                name=comp_data["name"],
-                template_path=comp_data["template_path"]
-            )
-            page.add_component(component)
+            page.add_component({
+            "name": comp_data["name"],
+            "props": comp_data.get("props", {})
+        })
+
             
         project.add_page(page)
         
     return project
+
+def list_components():
+    loader = ComponentLoader("components")
+    loader.load_all()
+    print("Available components:")
+    for name in loader.list_components():
+        print(f"- {name}")
 
 def main():
     """Точка входа CLI Sabo"""
@@ -42,8 +48,8 @@ def main():
     
     if command == "build":
         project_path = sys.argv[2]
-        Project = load_project_from_json(project_path)
-        builder = SiteBuilder(Project)
+        project = load_project_from_json(project_path)
+        builder = SiteBuilder(project)
         builder.build()
     else:
         print(f"Unknown command: {command}")

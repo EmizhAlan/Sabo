@@ -6,14 +6,10 @@
       "name": "Home Page",
       "components": [
         {
-          "id": "header1",
-          "name": "Main Header",
-          "template_path": "templates/header.html"
-        },
-        {
-          "id": "hero1",
-          "name": "Hero Section",
-          "template_path": "templates/hero.html"
+          "name": "button",
+          "props": {
+            "text": "Click me"
+          }
         }
       ]
     }
