@@ -1,0 +1,6 @@
+{
+  "props": {
+    "text": "Click me",
+    "type": "primary"
+  }
+}
