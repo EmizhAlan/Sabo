@@ -79,7 +79,7 @@ class ComponentLoader:
         css = ""
         if css_path.exists():
             with open(css_path, "r", encoding="utf-8") as f:
-                js = f.read()
+                css = f.read()
                 
         # --- Работа optin js
         js_path = component_dir / "script.js"
