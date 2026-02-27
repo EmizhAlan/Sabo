@@ -1,8 +1,18 @@
+# Python
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 
+# Packaging
+build/
 dist/
-.env
-*.env
+*.egg-info/
+
+# Virtual env
+venv/
+.env/
+
+# IDE
+.vscode/
+.idea/
