@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional
+from pathlib import Path
 
 @dataclass 
 class Component:
@@ -59,3 +60,18 @@ class Component:
         
     def __repr__(self):
         return f"<Component id={self.id}, name={self.name}>"
+    
+    def __init__(self, id: str, name: str, template: str, path: Path, css=None, js=None, props=None):
+        self.id = id
+        self.name = name
+        self.template = template
+        self.path = path
+        self.css = css or []
+        self.js = js or []
+        self.props = props or {}
+        
+    def get_css_paths(self):
+        return [self.path / css_file for css_file in self.css]\
+            
+    def get_js_paths(self):
+        return [self.path / js_file for js_file in self.js]

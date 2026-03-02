@@ -41,6 +41,9 @@ class ComponentLoader:
                 
         return self.components
     
+    def get(self, name: str):
+        return self.components.get(name)
+    
     def _load_component(self, component_dir: Path) -> Component:
         """
         Загружает один компонент из его директории.
@@ -51,7 +54,7 @@ class ComponentLoader:
         
         name = component_dir.name
         component_id=name
-        
+                
         # --- Чтение meta.json ---
         meta_path = component_dir / "meta.json"
         if not meta_path.exists():
@@ -63,6 +66,8 @@ class ComponentLoader:
             meta = json.load(f)
             
         props = meta.get("props", {})
+        css_files = meta.get("css", [])
+        js_files = meta.get("js", [])
         
         # --- Чтение template.html ---
         template_path = component_dir / "template.html"
@@ -71,26 +76,15 @@ class ComponentLoader:
                 f"template.html не найден в компоненте '{name}'"
             )
             
-        with open(template_path, "r", encoding="utf-8") as f:
-            template = f.read()
-            
-        # --- Чтение необязательного CSS ---
-        css_path = component_dir / "style.css"
-        css = ""
-        if css_path.exists():
-            with open(css_path, "r", encoding="utf-8") as f:
-                css = f.read()
-                
-        # --- Работа optin js
-        js_path = component_dir / "script.js"
-        js = js_path.read_text(encoding="utf-8") if js_path.exists() else ""
+        template = template_path.read_text(encoding="utf-8")
                 
         return Component(
             id=component_id,
             name=name,
             template=template,
-            css=css,
-            js=js,
+            path=component_dir,
+            css=css_files,
+            js=js_files,
             props=props
         )
         
