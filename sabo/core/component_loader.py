@@ -12,8 +12,8 @@
 import os
 import json
 from pathlib import Path
-from models.component import Component
-from core.component_definition import ComponentDefinition
+from sabo.models.component import Component
+from sabo.core.component_definition import ComponentDefinition
 
 class ComponentLoader:
     """
