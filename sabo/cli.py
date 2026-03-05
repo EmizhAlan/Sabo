@@ -2,10 +2,10 @@ import sys
 import json
 from pathlib import Path
 
-from models.project import Project
-from models.page import Page
-from builder.site_builder import SiteBuilder
-from core.component_loader import ComponentLoader
+from sabo.models.project import Project
+from sabo.models.page import Page
+from sabo.builder.site_builder import SiteBuilder
+from sabo.core.component_loader import ComponentLoader
 
 
 # Главный файл CLI Sabo. Обрабатывает команды пользователя и запускает сборку проекта.
