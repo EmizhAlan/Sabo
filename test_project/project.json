@@ -1,0 +1,29 @@
+{
+  "name": "test",
+  "pages": [
+    {
+      "id": 1,
+      "name": "index",
+      "components": [
+        {"name": "header", "props": {}},
+        {"name": "button", "props": {"text": "Click me"}}
+      ]
+    },
+    {
+      "id": 2,
+      "name": "about",
+      "components": [
+        {"name": "header", "props": {}},
+        {"name": "footer", "props": {}}
+      ]
+    },
+    {
+      "id": 3,
+      "name": "contact",
+      "components": [
+        {"name": "header", "props": {}},
+        {"name": "footer", "props": {}}
+      ]
+    }
+  ]
+}
